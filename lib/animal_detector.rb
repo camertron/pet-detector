@@ -1,8 +1,8 @@
 class AnimalScore
-  attr_reader :entity, :type, :chi_score, :pixel_score, :x, :y
+  attr_reader :name, :type, :chi_score, :pixel_score, :x, :y
 
-  def initialize(entity, type, chi_score, pixel_score, x, y)
-    @entity = entity
+  def initialize(name, type, chi_score, pixel_score, x, y)
+    @name = name
     @type = type
     @chi_score = chi_score
     @pixel_score = pixel_score
@@ -20,13 +20,13 @@ class AnimalScoreGroup
 
   def best_match
     # Choose the entity with the best chi square (smaller is better).
-    least_chi_entity = scores.min_by(&:chi_score).entity
+    least_chi_animal = scores.min_by(&:chi_score).name
 
     # Select all scores with the same entity name as the least chi square
     # entity. This is to be able to later compare the pixel scores of pet and
     # house pairs, since houses almost always have better chi squares than
     # pets but often have fewer matching pixels in their histograms.
-    matching = scores.select { |score| score.entity == least_chi_entity }
+    matching = scores.select { |score| score.name == least_chi_animal }
 
     # Of the scores with the same entity name, find the one with the best
     # pixel match (bigger is better).
@@ -57,16 +57,24 @@ class AnimalDetector
   end
 
   def detect_animals
-    groups = calc_score_groups
-    resolve_collisions(groups)
+    group_matrix = calc_score_groups
+    resolve_collisions(group_matrix)
+    group_matrix.map { |x, y, group| group.best_match if group }
   end
 
   private
 
   def calc_score_groups
-    grid.each_quadrant.map do |x, y, quad|
+    quadrants = grid.map_quadrants do |x, y, quad|
       # trim off 16% from the bottom, which can include the top of another house
-      quad.rect.bottom -= (quad.rect.height * 0.16).round
+      quad = Quadrant.new(
+        quad.bitmap, Rect.new(
+          quad.rect.left,
+          quad.rect.right,
+          quad.rect.top,
+          quad.rect.bottom - (quad.rect.height * 0.16).round
+        )
+      )
 
       hist = quad
         .histogram(hist_variance)
@@ -97,16 +105,19 @@ class AnimalDetector
       scores.reject! { |score| score.pixel_score < MATCHING_PIXEL_THRESHOLD }
       scores.size == 0 ? nil : AnimalScoreGroup.new(scores)
     end
+
+    Matrix.new(quadrants)
   end
 
   # resolves the cases where the same animal/house was chosen for multiple grid
   # quadrants
-  def resolve_collisions(groups)
+  def resolve_collisions(group_matrix)
     loop do
       # put best matches into buckets
-      collisions = groups.compact.each_with_object({}) do |group, ret|
+      collisions = group_matrix.each_with_object({}) do |(x, y, group), ret|
+        next unless group
         match = group.best_match
-        key = "#{match.type}#{match.entity}"
+        key = "#{match.type}#{match.name}"
         ret[key] ||= []
         ret[key] << group
       end
@@ -131,7 +142,7 @@ class AnimalDetector
       end
     end
 
-    groups
+    group_matrix
   end
 
   def unfiltered_pixel_pct(filtered_hist, quad)

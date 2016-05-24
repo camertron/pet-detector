@@ -43,4 +43,13 @@ class Grid
       end
     end
   end
+
+  def map_quadrants
+    return to_enum(__method__) unless block_given?
+    quadrants.each_with_index.map do |row, row_idx|
+      row.each_with_index.map do |quadrant, col_idx|
+        yield col_idx, row_idx, quadrant
+      end
+    end
+  end
 end

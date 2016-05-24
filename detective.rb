@@ -1,16 +1,23 @@
 require 'pry-byebug'
+require 'benchmark'
 
 autoload :AnimalDetector,   './lib/animal_detector'
 autoload :Bitmap,           './lib/bitmap'
 autoload :BoundaryDetector, './lib/boundary_detector'
+autoload :CarDetector,      './lib/car_detector'
 autoload :ColorRange,       './lib/color_range'
+autoload :EntityDetector,   './lib/entity_detector'
+autoload :EntityMatrix,     './lib/entity_matrix'
 autoload :Grid,             './lib/grid'
 autoload :Histogram,        './lib/histogram'
+autoload :Matrix,           './lib/matrix'
 autoload :Quadrant,         './lib/quadrant'
 autoload :Rect,             './lib/rect'
+autoload :Solver,           './lib/solver'
+autoload :TrackDetector,    './lib/track_detector'
 
-bmp = Bitmap.load('./IMG_1468.jpg')  # quad
-# bmp = Bitmap.load('./IMG_1471.jpg')  # quad2
+# bmp = Bitmap.load('./IMG_1468.jpg')  # quad
+bmp = Bitmap.load('./IMG_1471.jpg')  # quad2
 # bmp = Bitmap.load('./IMG_1474.jpg')  # quad3
 # bmp = Bitmap.load('./IMG_1475.jpg')  # quad4
 det = BoundaryDetector.new(bmp)
@@ -33,8 +40,41 @@ grid = Grid.new(bmp, rect)
 # end
 
 animals = %w(Cockatiel Dachsund Hedgehog Husky Siamese Tabby Turtle)
-entity_detector = AnimalDetector.new(grid, animals)
-groups = entity_detector.detect_animals
+entity_matrix = EntityDetector.new(grid, animals).entities
+# distance_map = entity_matrix.to_distance_map
+
+# results = entity_matrix.flat_map do |x, y, entity|
+#   "(#{x}, #{y}) #{entity}"
+# end
+
+# puts results.sort.join("\n")
+
+solver = Solver.new(entity_matrix, 23)
+puts "Started..."
+result = nil
+puts(Benchmark.measure do
+  result = solver.solve
+end)
+
+# puts result.map { |e| "#{e.pet? ? 'pet' : 'house'}#{e.name}" }.join("\n")
+
+exit 0
+
+track_detector = TrackDetector.new(grid)
+directions = track_detector.detect_directions
+binding.pry
+
+exit 0
+
+car_detector = CarDetector.new(grid)
+result = car_detector.detect_car
+puts result.inspect
+
+exit 0
+
+animals = %w(Cockatiel Dachsund Hedgehog Husky Siamese Tabby Turtle)
+animal_detector = AnimalDetector.new(grid, animals)
+groups = animal_detector.detect_animals
 matches = groups.compact.map { |g| g.best_match }
 
 expected = {

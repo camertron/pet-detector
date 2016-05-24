@@ -13,6 +13,7 @@ GEM
       byebug (~> 8.0)
       pry (~> 0.10)
     rmagick (2.15.4)
+    simple-graph (1.0.0)
     slop (3.6.0)
 
 PLATFORMS
@@ -22,6 +23,7 @@ DEPENDENCIES
   phashion
   pry-byebug
   rmagick
+  simple-graph
 
 BUNDLED WITH
    1.11.2

@@ -50,8 +50,12 @@ class PetEntity < Entity
     true
   end
 
+  def to_directional_s
+    "#{super} #{to_s}"
+  end
+
   def to_s
-    "#{super} pet#{name}"
+    "pet#{name}"
   end
 end
 
@@ -67,8 +71,12 @@ class HouseEntity < Entity
     true
   end
 
+  def to_directional_s
+    "#{super} #{to_s}"
+  end
+
   def to_s
-    "#{super} house#{name}"
+    "house#{name}"
   end
 end
 
@@ -77,8 +85,12 @@ class CarEntity < Entity
     true
   end
 
+  def to_directional_s
+    "#{super} #{to_s}"
+  end
+
   def to_s
-    "#{super} car"
+    'car'
   end
 end
 

@@ -1,0 +1,91 @@
+levels:
+  - width: 3
+    height: 3
+    animals:
+      - Tabby
+      - Dachsund
+  - width: 3
+    height: 5
+    animals:
+      - Tabby
+      - Dachsund
+  - width: 3
+    height: 3
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+  - width: 4
+    height: 6
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+  - width: 3
+    height: 4
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+  - width: 4
+    height: 6
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+  - width: 3
+    height: 4
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+      - Husky
+  - width: 4
+    height: 6
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+      - Husky
+  - width: 3
+    height: 5
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+      - Husky
+      - Siamese
+  - width: 4
+    height: 6
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+      - Husky
+      - Siamese
+  - width: 3
+    height: 5
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+      - Husky
+      - Siamese
+      - Cockatiel
+  - width: 4
+    height: 6
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+      - Husky
+      - Siamese
+      - Cockatiel

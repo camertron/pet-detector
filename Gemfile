@@ -1,5 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rmagick'
-gem 'pry-byebug'
-gem 'simple-graph'
+gemspec
+
+group :development do
+  gem 'pry-byebug'
+end
+
+group :test do
+  gem 'rspec'
+end

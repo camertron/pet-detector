@@ -1,0 +1,80 @@
+#! /usr/bin/env ruby
+
+require 'optparse'
+require 'pry-byebug'
+require 'benchmark'
+
+require 'pet-detector'
+
+include PetDetector
+
+options = {}
+
+option_parser = OptionParser.new do |opts|
+  opts.banner = "Usage: pet-detector -f FILE -g GAS -l LEVEL"
+
+  opts.on('-f', '--file FILE', 'Screenshot of game to solve') do |file|
+    options[:file] = file
+  end
+
+  opts.on('-g', '--gas AMOUNT', 'Amount of gas available') do |gas|
+    options[:gas] = gas
+  end
+
+  opts.on('-l', '--level LEVEL', "The level you're on") do |level|
+    options[:level] = level
+  end
+
+  opts.on_tail('-h', '--help', 'Show this message') do
+    puts opts
+    exit 0
+  end
+end
+
+option_parser.parse!
+
+if !options.include?(:gas) || !options.include?(:level) || !options.include?(:file)
+  puts option_parser
+  exit 0
+end
+
+level = Level.get(options[:level].to_i)
+bmp = Bitmap.load(options[:file])
+det = BoundaryDetector.new(bmp)
+
+STDOUT.write('Detecting grid boundaries... ')
+rect = det.get_bounds
+puts "Top: #{rect.top}, Bottom: #{rect.bottom}, Left: #{rect.left}, Right: #{rect.right}"
+
+grid = Grid.new(bmp, rect, level)
+
+grid.quadrants.each_with_index do |row, row_idx|
+  row.each_with_index do |quad, col_idx|
+    img = Magick::Image.new(quad.rect.width, quad.rect.height)
+    img.store_pixels(0, 0, quad.rect.width, quad.rect.height, quad.pixels)
+    img.write("quad/#{col_idx}-#{row_idx}.jpg")
+  end
+end
+
+exit 0
+STDOUT.write('Detecting entities... ')
+entity_matrix = EntityDetector.new(grid, level.animals).entities
+puts ''
+results = entity_matrix.flat_map do |x, y, entity|
+  "(#{x}, #{y}) #{entity.to_directional_s}"
+end
+
+puts results.sort.join("\n")
+puts 'done'
+
+STDOUT.write('Attempting to solve... ')
+solver = Solver.new(entity_matrix, options[:gas].to_i)
+solution = solver.solve
+puts 'done'
+
+puts "\nOk, give this a try:"
+puts ''
+
+solution.each_with_index do |entity, idx|
+  puts "#{idx + 1}. #{entity.to_s}"
+end

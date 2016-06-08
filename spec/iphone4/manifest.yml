@@ -1,0 +1,188 @@
+- file: level12/sim1.png
+  quad:
+    - - track: bottom
+      - track: bottom right
+      - track: left right
+      - track: left bottom
+    - - track: top bottom right
+        entity: petSiamese
+      - track: top bottom left right
+      - track: bottom left right
+        entity: houseCockatiel
+      - track: top bottom left
+    - - track: top bottom right
+        entity: houseTabby
+      - track: top bottom left
+        entity: petTabby
+      - track: top bottom right
+        entity: car
+      - track: top bottom left
+        entity: petCockatiel
+    - - track: top bottom right
+      - track: top left right
+      - track: top left right
+        entity: houseSiamese
+      - track: top bottom left
+        entity: houseTurtle
+    - - track: top bottom
+        entity: petHedgehog
+      - track: bottom right
+        entity: petHusky
+      - track: bottom left right
+        entity: petDacshund
+      - track: top bottom left
+    - - track: top
+        entity: petTurtle
+      - track: top right
+        entity: houseHedgehog
+      - track: top left right
+        entity: houseDacshund
+      - track: left top
+        entity: houseHusky
+
+- file: level12/sim2.png
+  quad:
+    - - track: bottom
+        entity: houseHedgehog
+      - track: bottom right
+        entity: petDacshund
+      - track: left bottom
+        entity: houseDacshund
+      - track: bottom
+    - - track: top bottom
+      - track: top bottom right
+        entity: houseTurtle
+      - track: top bottom left right
+      - track: top bottom left
+        entity: petHusky
+    - - track: top bottom right
+      - track: top left right
+        entity: car
+      - track: top bottom left
+      - track: top bottom
+        entity: petSiamese
+    - - track: top bottom right
+        entity: petHedgehog
+      - track: bottom left right
+      - track: top bottom left
+      - track: top bottom
+    - - track: top bottom right
+        entity: petTurtle
+      - track: top bottom left right
+      - track: top bottom left
+        entity: houseTabby
+      - track: top bottom
+        entity: petTabby
+    - - track: top right
+        entity: houseHusky
+      - track: top left right
+        entity: houseCockatiel
+      - track: top left right
+        entity: petCockatiel
+      - track: top left
+        entity: houseSiamese
+
+- file: level12/sim3.png
+  quad:
+    - - track: bottom right
+        entity: houseCockatiel
+      - track: bottom left right
+      - track: bottom left right
+        entity: houseHusky
+      - track: bottom left
+        entity: houseTurtle
+    - - track: top right
+      - track: top bottom left
+        entity: houseSiamese
+      - track: top bottom right
+        entity: petCockatiel
+      - track: top left
+        entity: houseTabby
+    - - track: bottom right
+        entity: petHedgehog
+      - track: top left
+      - track: top bottom right
+      - track: bottom left
+    - - track: top bottom
+        entity: petDacshund
+      - track: bottom right
+      - track: top bottom left
+        entity: car
+      - track: top bottom
+        entity: petHusky
+    - - track: top bottom right
+        entity: petTabby
+      - track: top bottom left right
+        entity: houseDacshund
+      - track: top bottom left right
+      - track: top bottom left
+        entity: houseHedgehog
+    - - track: top right
+      - track: top left right
+      - track: top left right
+        entity: petSiamese
+      - track: top left
+        entity: petTurtle
+
+- file: level3/sim1.png
+  quad:
+    - - track: bottom right
+        entity: petHedgehog
+      - track: bottom left right
+        entity: petTabby
+      - track: bottom left
+        entity: houseHedgehog
+    - - track: top bottom
+      - track: top right
+        entity: car
+      - track: top bottom left
+        entity: houseTabby
+    - - track: top right
+      - track: left right
+        entity: petDacshund
+      - track: top left
+        entity: houseDacshund
+
+- file: level5/sim1.png
+  quad:
+    - - track: bottom right
+        entity: petDacshund
+      - track: bottom left right
+        entity: petHedgehog
+      - track: bottom left
+        entity: petTabby
+    - - track: top right
+      - track: top bottom left
+      - track: top bottom
+        entity: houseTurtle
+    - - track: bottom right
+      - track: top left right
+        entity: car
+      - track: top bottom left
+        entity: petTurtle
+    - - track: top right
+        entity: houseTabby
+      - track: left right
+        entity: houseHedgehog
+      - track: top left
+        entity: houseDacshund
+
+- file: level5/sim2.png
+  quad:
+    - - track: right
+        entity: petHedgehog
+      - track: bottom left right
+        entity: petTurtle
+      - track: bottom left
+        entity: houseTurtle
+    - - track: bottom right
+        entity: houseTabby
+      - track: top bottom left
+        entity: car
+      - track: top bottom
+        entity: houseHedgehog
+    - - track: top right
+        entity: petDacshund
+      - track: top right left
+        entity: houseDacshund
+      - track: top left

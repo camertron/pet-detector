@@ -1,8 +1,16 @@
+PATH
+  remote: .
+  specs:
+    pet-detector (1.0)
+      rmagick (~> 2.0)
+      simple-graph (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
     byebug (8.2.4)
     coderay (1.1.1)
+    diff-lcs (1.2.5)
     method_source (0.8.2)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -12,6 +20,19 @@ GEM
       byebug (~> 8.0)
       pry (~> 0.10)
     rmagick (2.15.4)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.4)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     simple-graph (1.0.0)
     slop (3.6.0)
 
@@ -19,9 +40,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  pet-detector!
   pry-byebug
-  rmagick
-  simple-graph
+  rspec
 
 BUNDLED WITH
-   1.11.2
+   1.12.4

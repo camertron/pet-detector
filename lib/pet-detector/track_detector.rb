@@ -56,7 +56,7 @@ module PetDetector
 
     # track must exist within this percentage of the left, right, top, and bottom
     # quadrant boundaries
-    TOLERANCE_PCT = 0.22
+    TOLERANCE_PCT = 0.15
 
     attr_reader :grid
 

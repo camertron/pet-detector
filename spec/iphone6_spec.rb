@@ -10,6 +10,10 @@ describe 'iPhone 6' do
     )
   end
 
+  let(:image_path) do
+    File.expand_path("../iphone6/#{image_file}", __FILE__)
+  end
+
   describe 'level12' do
     let(:level) { 12 }
 

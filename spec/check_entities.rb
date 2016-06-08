@@ -40,9 +40,7 @@ RSpec.configure do |config|
     end
 
     let(:entity_matrix) do
-      find_entities(
-        File.expand_path("../iphone6/#{image_file}", __FILE__), level
-      )
+      find_entities(image_path, level)
     end
 
     it 'detects all entities and track correctly' do

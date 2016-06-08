@@ -1,4 +1,4 @@
-file: level11/sim1.png
+- file: level11/sim1.png
   quad:
     - - track: bottom
         entity: houseHedgehog
@@ -28,10 +28,10 @@ file: level11/sim1.png
         entity: petHedgehog
       - track: top left right
         entity: petCockatiel
-      - track: top right
+      - track: top left
         entity: houseCockatiel
 
-file: level12/sim1.png
+- file: level12/sim1.png
   quad:
     - - track: bottom right
         entity: petSiamese
@@ -73,7 +73,7 @@ file: level12/sim1.png
       - track: top
         entity: petDacshund
 
-file: level5/sim1.png
+- file: level5/sim1.png
   quad:
     - - track: bottom right
       - track: bottom left
@@ -97,7 +97,7 @@ file: level5/sim1.png
       - track: top left
         entity: petDacshund
 
-file: level8/sally.jpg
+- file: level8/sally.jpg
   quad:
     - - track: bottom right
       - track: left right
@@ -116,7 +116,7 @@ file: level8/sally.jpg
       - track: top right
       - track: top left
     - - track: top bottom
-      - track: top bottom
+      - track: top bottom right
         entity: car
       - track: bottom left right
         entity: petTurtle

@@ -1,4 +1,4 @@
-file: level12/sim1.png
+- file: level12/sim1.jpg
   quad:
     - - track: bottom right
       - track: left right
@@ -40,7 +40,7 @@ file: level12/sim1.png
       - track: top left
         entity: houseTabby
 
-file: level12/sim2.png
+- file: level12/sim2.jpg
   quad:
     - - track: bottom right
         entity: houseTurtle
@@ -82,7 +82,7 @@ file: level12/sim2.png
         entity: petSiamese
       - track: left
 
-file: level12/sim3.png
+- file: level12/sim3.jpg
   quad:
     - - track: bottom right
       - track: bottom left right
@@ -124,7 +124,7 @@ file: level12/sim3.png
         entity: petTabby
       - track: top
 
-file: level12/sim4.png
+- file: level12/sim4.jpg
   quad:
     - - track: bottom right
         entity: petHusky
@@ -166,7 +166,7 @@ file: level12/sim4.png
       - track: left right
       - track: top left
 
-file: level12/sim5.png
+- file: level12/sim5.jpg
   quad:
     - - track: right
       - track: bottom left right
@@ -208,7 +208,7 @@ file: level12/sim5.png
       - track: left
         entity: petHedgehog
 
-file: level12/real_deal.jpg
+- file: level12/real_deal.jpg
   quad:
     - - track: bottom right
         entity: houseCockatiel
@@ -240,7 +240,7 @@ file: level12/real_deal.jpg
         entity: petCockatiel
       - track: top right
       - track: bottom left right
-      - track: bottom left
+      - track: top bottom left
         entity: houseTurtle
     - - track: top right
         entity: houseSiamese
@@ -250,7 +250,7 @@ file: level12/real_deal.jpg
       - track: top left
         entity: houseHusky
 
-file: level12/real_deal2.jpg
+- file: level12/real_deal2.jpg
   quad:
     - - track: bottom right
       - track: left right
@@ -292,7 +292,7 @@ file: level12/real_deal2.jpg
         entity: petTabby
       - track: top left
 
-file: level12/real_deal3.jpg
+- file: level12/real_deal3.jpg
   quad:
     - - track: right
         entity: petHedgehog

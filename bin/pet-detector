@@ -2,7 +2,7 @@
 
 require 'optparse'
 require 'pry-byebug'
-require 'benchmark'
+require 'fileutils'
 
 require 'pet-detector'
 
@@ -44,27 +44,37 @@ det = BoundaryDetector.new(bmp)
 
 STDOUT.write('Detecting grid boundaries... ')
 rect = det.get_bounds
-puts "Top: #{rect.top}, Bottom: #{rect.bottom}, Left: #{rect.left}, Right: #{rect.right}"
+
+if ENV['DEBUG']
+  puts "Top: #{rect.top}, Bottom: #{rect.bottom}, Left: #{rect.left}, Right: #{rect.right}"
+end
 
 grid = Grid.new(bmp, rect, level)
 
-grid.quadrants.each_with_index do |row, row_idx|
-  row.each_with_index do |quad, col_idx|
-    img = Magick::Image.new(quad.rect.width, quad.rect.height)
-    img.store_pixels(0, 0, quad.rect.width, quad.rect.height, quad.pixels)
-    img.write("quad/#{col_idx}-#{row_idx}.jpg")
+if ENV['DEBUG']
+  FileUtils.mkdir_p('./quad')
+
+  grid.quadrants.each_with_index do |row, row_idx|
+    row.each_with_index do |quad, col_idx|
+      img = Magick::Image.new(quad.rect.width, quad.rect.height)
+      img.store_pixels(0, 0, quad.rect.width, quad.rect.height, quad.pixels)
+      img.write("quad/#{col_idx}-#{row_idx}.jpg")
+    end
   end
 end
 
-exit 0
 STDOUT.write('Detecting entities... ')
 entity_matrix = EntityDetector.new(grid, level.animals).entities
-puts ''
-results = entity_matrix.flat_map do |x, y, entity|
-  "(#{x}, #{y}) #{entity.to_directional_s}"
+
+if ENV['DEBUG']
+  puts ''
+  results = entity_matrix.flat_map do |x, y, entity|
+    "(#{x}, #{y}) #{entity.to_directional_s}"
+  end
+
+  puts results.sort.join("\n")
 end
 
-puts results.sort.join("\n")
 puts 'done'
 
 STDOUT.write('Attempting to solve... ')

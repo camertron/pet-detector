@@ -3,7 +3,7 @@ module PetDetector
     X_OFFSET_FACTOR = 0.15
     Y_OFFSET_FACTOR = 0.15
 
-    BOUNDS_ADJUSTMENT_FACTOR = 0.15
+    BOUNDS_ADJUSTMENT_FACTOR = 0.10
     COLOR_RANGE = ColorRange.new(0..35, 0..35, 0..35)
     PROBE_COUNT = 7
 

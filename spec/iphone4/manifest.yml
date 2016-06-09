@@ -181,6 +181,10 @@
         entity: car
       - track: top bottom
         entity: houseHedgehog
+    - - track: top bottom
+      - track: top bottom right
+        entity: petTabby
+      - track: top bottom left
     - - track: top right
         entity: petDacshund
       - track: top right left

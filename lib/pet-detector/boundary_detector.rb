@@ -1,9 +1,19 @@
 module PetDetector
   class BoundaryDetector
-    X_OFFSET_FACTOR = 0.15
-    Y_OFFSET_FACTOR = 0.18
+    X_OFFSET_FACTOR = 0.15  # pct
 
-    BOUNDS_ADJUSTMENT_FACTOR = 0.10
+    # aspect ratio => offset factor (pct)
+    Y_OFFSET_FACTORS = {
+      0.56 => 0.18,
+      0.66 => 0.15
+    }
+
+    # aspect ratio => adjustment factor (pct)
+    BOUNDS_ADJUSTMENT_FACTORS = {
+      0.56 => 0.10,
+      0.66 => 0.12
+    }
+
     COLOR_RANGE = ColorRange.new(0..35, 0..35, 0..35)
     PROBE_COUNT = 7
 
@@ -26,10 +36,30 @@ module PetDetector
 
     private
 
+    def aspect_ratio
+      ((bitmap.columns.to_f / bitmap.rows) * 100).floor / 100.0
+    end
+
+    def x_offset_factor
+      X_OFFSET_FACTOR
+    end
+
+    def y_offset_factor
+      Y_OFFSET_FACTORS.fetch(aspect_ratio) do
+        raise StandardError, 'unsupported aspect ratio'
+      end
+    end
+
+    def bounds_adjustment_factor
+      BOUNDS_ADJUSTMENT_FACTORS.fetch(aspect_ratio) do
+        raise StandardError, 'unsupported aspect ratio'
+      end
+    end
+
     def adjust(rect)
       # the adjustment factor is calculated as a function of width, then used to
       # adjust both width and height
-      adjustment = (rect.width * BOUNDS_ADJUSTMENT_FACTOR).to_i
+      adjustment = (rect.width * bounds_adjustment_factor).to_i
 
       Rect.new(
         rect.left - adjustment,
@@ -40,11 +70,11 @@ module PetDetector
     end
 
     def x_offset
-      (bitmap.columns * X_OFFSET_FACTOR).round
+      (bitmap.columns * x_offset_factor).round
     end
 
     def y_offset
-      (bitmap.rows * Y_OFFSET_FACTOR).round
+      (bitmap.rows * y_offset_factor).round
     end
 
     def probe_left

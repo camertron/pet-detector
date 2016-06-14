@@ -1,5 +1,5 @@
 module PetDetector
-  class Solver
+  class GASolver
     MAX_CAR_CAPACITY = 4
     POPULATION_SIZE = 50
     SURVIVAL_RATE = 0.10

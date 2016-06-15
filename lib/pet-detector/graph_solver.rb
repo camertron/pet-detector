@@ -10,7 +10,7 @@ module PetDetector
     end
 
     def solve
-      solve_helper(car, [], entities, gas, [])
+      solve_helper(car, [], houses_and_pets, gas, [])
     end
 
     private
@@ -24,22 +24,27 @@ module PetDetector
         gas = current_gas - distance_between(last_entity, candidate)
         return nil if gas < 0
 
-        if candidate.house?
+        result = if candidate.house?
           # drop off a pet
           corresponding_pet = house_pet_map[candidate]
 
           if car_pets.include?(corresponding_pet)
-            car_pets -= [corresponding_pet]
+            solve_helper(
+              candidate,
+              car_pets - [corresponding_pet],
+              remaining_entities - [candidate],
+              gas, current_path + [candidate]
+            )
           end
         elsif candidate.pet?
           # pick up a pet
-          car_pets += [candidate]
+          solve_helper(
+            candidate,
+            car_pets + [candidate],
+            remaining_entities - [candidate],
+            gas, current_path + [candidate]
+          )
         end
-
-        result = solve_helper(
-          candidate, car_pets, remaining_entities - [candidate], gas,
-          current_path + [candidate]
-        )
 
         return result if result
       end

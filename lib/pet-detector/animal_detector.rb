@@ -169,6 +169,10 @@ module PetDetector
     end
 
     def hist_cache
+      self.class.hist_cache
+    end
+
+    def self.hist_cache
       @hist_cache ||= {}
     end
   end

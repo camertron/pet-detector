@@ -22,6 +22,10 @@ module PetDetector
       )
     end
 
+    def reject_gray
+      reject { |p| p.red == p.green && p.green == p.blue }
+    end
+
     def buckets
       @buckets ||= pixels.each_with_object({}) do |pixel, hist|
         key = [
@@ -44,6 +48,18 @@ module PetDetector
         observed_freq = (buckets[pixel] || 0).to_f
         sum + ((observed_freq - expected_freq) ** 2) / (expected_freq + observed_freq)
       end
+    end
+
+    def pct_gray
+      gray_count = 0.0
+      total_count = 0.0
+
+      buckets.each_pair do |bucket, count|
+        gray_count += count if bucket[0] == bucket[1] && bucket[1] == bucket[2]
+        total_count += count
+      end
+
+      gray_count / total_count
     end
   end
 end

@@ -1,22 +1,11 @@
 require 'pry-byebug'
 require 'benchmark'
+require 'pet-detector'
 
-autoload :AnimalDetector,   './lib/animal_detector'
-autoload :Bitmap,           './lib/bitmap'
-autoload :BoundaryDetector, './lib/boundary_detector'
-autoload :CarDetector,      './lib/car_detector'
-autoload :ColorRange,       './lib/color_range'
-autoload :EntityDetector,   './lib/entity_detector'
-autoload :EntityMatrix,     './lib/entity_matrix'
-autoload :Grid,             './lib/grid'
-autoload :Histogram,        './lib/histogram'
-autoload :Matrix,           './lib/matrix'
-autoload :Quadrant,         './lib/quadrant'
-autoload :Rect,             './lib/rect'
-autoload :Solver,           './lib/solver'
-autoload :TrackDetector,    './lib/track_detector'
+include PetDetector
 
-bmp = Bitmap.load('./real_deal2.jpg')
+bmp = Bitmap.load('/Users/cameron/Desktop/petdetective2.jpg')
+# bmp = Bitmap.load('./real_deal2.jpg')
 # bmp = Bitmap.load('./IMG_1468.jpg')  # quad
 # bmp = Bitmap.load('./IMG_1471.jpg')  # quad2
 # bmp = Bitmap.load('./IMG_1474.jpg')  # quad3
@@ -25,20 +14,22 @@ det = BoundaryDetector.new(bmp)
 rect = det.get_bounds
 
 # widen/lengthen bounds to make room for edge quadrants
-rect.left -= 52
-rect.right += 52
-rect.top -= 52
-rect.bottom += 52
+# rect.left -= 52
+# rect.right += 52
+# rect.top -= 52
+# rect.bottom += 52
 
-grid = Grid.new(bmp, rect)
+grid = Grid.new(bmp, rect, Level.get(12))
 
-# grid.quadrants.each_with_index do |row, row_idx|
-#   row.each_with_index do |quad, col_idx|
-#     img = Magick::Image.new(quad.rect.width, quad.rect.height)
-#     img.store_pixels(0, 0, quad.rect.width, quad.rect.height, quad.pixels)
-#     img.write("/Users/cameron/workspace/pet/quad4/#{col_idx}-#{row_idx}.jpg")
-#   end
-# end
+grid.quadrants.each_with_index do |row, row_idx|
+  row.each_with_index do |quad, col_idx|
+    img = Magick::Image.new(quad.rect.width, quad.rect.height)
+    img.store_pixels(0, 0, quad.rect.width, quad.rect.height, quad.pixels)
+    img.write("./quad/#{col_idx}-#{row_idx}.jpg")
+  end
+end
+
+exit 0
 
 animals = %w(Cockatiel Dachsund Hedgehog Husky Siamese Tabby Turtle)
 entity_matrix = EntityDetector.new(grid, animals).entities

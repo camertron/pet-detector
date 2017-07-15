@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     pet-detector (1.0)
+      phashion
       rmagick (~> 2.0)
       simple-graph (~> 1.0)
 
@@ -12,6 +13,7 @@ GEM
     coderay (1.1.1)
     diff-lcs (1.3)
     method_source (0.8.2)
+    phashion (1.2.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -49,4 +51,4 @@ DEPENDENCIES
   ruby-prof
 
 BUNDLED WITH
-   1.14.6
+   1.15.1

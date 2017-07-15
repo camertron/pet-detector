@@ -100,3 +100,14 @@ levels:
       - Siamese
       - Cockatiel
       - Ferret
+  - width: 4
+    height: 6
+    animals:
+      - Tabby
+      - Dachsund
+      - Hedgehog
+      - Turtle
+      - Husky
+      - Siamese
+      - Cockatiel
+      - Ferret

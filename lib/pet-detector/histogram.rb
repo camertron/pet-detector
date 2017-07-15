@@ -28,10 +28,14 @@ module PetDetector
 
     def buckets
       @buckets ||= pixels.each_with_object({}) do |pixel, hist|
+        red = pixel.red & 255
+        green = pixel.green & 255
+        blue = pixel.blue & 255
+
         key = [
-          ((pixel.red & 255) / variance).round,
-          ((pixel.green & 255) / variance).round,
-          ((pixel.blue & 255) / variance).round
+          red - (red % variance),
+          green - (green % variance),
+          blue - (blue % variance)
         ]
 
         hist[key] ||= 0

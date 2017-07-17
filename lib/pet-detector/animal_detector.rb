@@ -28,6 +28,7 @@ module PetDetector
   class AnimalDetector
     UNFILTERED_PIXEL_THRESHOLD = 0.05
     GRAY_HOUSE_PERCENTAGE = 0.65
+    MAX_HAMMING_DISTANCE = 15
     CLEANUP_FILTER = ColorRange.new(0..75, 0..75, 0..75)
     ALL_ANIMALS = %w(
       Chameleon Cockatiel Dachsund Ferret Hedgehog
@@ -80,7 +81,7 @@ module PetDetector
           ret << AnimalScore.new(animal, type, distance, x, y)
         end
 
-        scores.reject! { |s| s.distance > 20 }
+        scores.reject! { |s| s.distance > MAX_HAMMING_DISTANCE }
         scores.size == 0 ? nil : AnimalScoreGroup.new(scores)
       end
 

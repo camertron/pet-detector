@@ -29,14 +29,14 @@
       - track: bottom right
         entity: petHusky
       - track: bottom left right
-        entity: petDacshund
+        entity: petDachsund
       - track: top bottom left
     - - track: top
         entity: petTurtle
       - track: top right
         entity: houseHedgehog
       - track: top left right
-        entity: houseDacshund
+        entity: houseDachsund
       - track: left top
         entity: houseHusky
 
@@ -45,9 +45,9 @@
     - - track: bottom
         entity: houseHedgehog
       - track: bottom right
-        entity: petDacshund
+        entity: petDachsund
       - track: left bottom
-        entity: houseDacshund
+        entity: houseDachsund
       - track: bottom
     - - track: top bottom
       - track: top bottom right
@@ -104,7 +104,7 @@
       - track: top bottom right
       - track: bottom left
     - - track: top bottom
-        entity: petDacshund
+        entity: petDachsund
       - track: bottom right
       - track: top bottom left
         entity: car
@@ -113,7 +113,7 @@
     - - track: top bottom right
         entity: petTabby
       - track: top bottom left right
-        entity: houseDacshund
+        entity: houseDachsund
       - track: top bottom left right
       - track: top bottom left
         entity: houseHedgehog
@@ -139,14 +139,14 @@
         entity: houseTabby
     - - track: top right
       - track: left right
-        entity: petDacshund
+        entity: petDachsund
       - track: top left
-        entity: houseDacshund
+        entity: houseDachsund
 
 - file: level5/sim1.png
   quad:
     - - track: bottom right
-        entity: petDacshund
+        entity: petDachsund
       - track: bottom left right
         entity: petHedgehog
       - track: bottom left
@@ -165,7 +165,7 @@
       - track: left right
         entity: houseHedgehog
       - track: top left
-        entity: houseDacshund
+        entity: houseDachsund
 
 - file: level5/sim2.png
   quad:
@@ -186,7 +186,7 @@
         entity: petTabby
       - track: top bottom left
     - - track: top right
-        entity: petDacshund
+        entity: petDachsund
       - track: top right left
-        entity: houseDacshund
+        entity: houseDachsund
       - track: top left

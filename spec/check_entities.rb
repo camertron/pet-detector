@@ -56,6 +56,12 @@ RSpec.configure do |config|
         expected_quad = manifest_entry['quad'][row][col]
         expected_track = parse_track_directions(expected_quad['track'])
 
+        if entity.car? || entity.pet? || entity.house?
+          expect(entity.to_s).to eq(expected_quad['entity']), -> do
+            "Expected track at (#{col}, #{row}) to have entity #{expected_quad['entity']}, instead found #{entity.to_s}"
+          end
+        end
+
         expect(entity.directions.top).to eq(expected_track[:top]), -> do
           "Expected track at (#{col}, #{row}) to #{expected_track[:top] ? 'have' : 'not have'} a top segment."
         end

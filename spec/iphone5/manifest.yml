@@ -5,9 +5,9 @@
       - track: bottom right
         entity: petHusky
       - track: bottom left
-        entity: petDacshund
+        entity: petDachsund
     - - track: top bottom right
-        entity: houseDacshund
+        entity: houseDachsund
       - track: top bottom left right
         entity: petSiamese
       - track: top bottom left
@@ -52,7 +52,7 @@
         entity: petHedgehog
       - track: bottom left
     - - track: top bottom right
-        entity: houseDacshund
+        entity: houseDachsund
       - track: top left right
       - track: top left right
         entity: car
@@ -71,7 +71,7 @@
       - track: top left
         entity: petTabby
       - track: top
-        entity: petDacshund
+        entity: petDachsund
 
 - file: level5/sim1.png
   quad:
@@ -92,10 +92,10 @@
         entity: houseTurtle
       - track: bottom left
     - - track: top right
-        entity: houseDacshund
+        entity: houseDachsund
       - track: top left right
       - track: top left
-        entity: petDacshund
+        entity: petDachsund
 
 - file: level8/sally.jpg
   quad:
@@ -112,7 +112,7 @@
     - - track: top bottom right
         entity: houseTabby
       - track: top bottom left
-        entity: houseDacshund
+        entity: houseDachsund
       - track: top right
       - track: top left
     - - track: top bottom
@@ -130,7 +130,7 @@
     - - track: top right
         entity: houseTurtle
       - track: top left right
-        entity: petDacshund
+        entity: petDachsund
       - track: top left
       - track: top
         entity: petHedgehog

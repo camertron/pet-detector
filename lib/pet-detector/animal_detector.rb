@@ -79,7 +79,7 @@ module PetDetector
           ret << AnimalScore.new(animal, type, distance, x, y)
         end
 
-        scores.reject! { |s| s.distance > 15 }
+        scores.reject! { |s| s.distance > 20 }
         scores.size == 0 ? nil : AnimalScoreGroup.new(scores)
       end
 

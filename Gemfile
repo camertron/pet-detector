@@ -6,6 +6,7 @@ group :development do
   gem 'pry-byebug'
   gem 'ruby-prof'
   gem 'rake'
+  gem 'plist'
 end
 
 group :test do

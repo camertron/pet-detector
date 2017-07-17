@@ -18,6 +18,6 @@ frames.each_pair do |filename, frame_data|
   height = y2 - y1
 
   road = image.crop(x1, y1, width, height)
-  road.write("./road/#{filename}")
+  road.write("./resources/road/#{filename}")
   road.destroy!
 end

@@ -17,4 +17,8 @@ module PetDetector
   autoload :TrackDetector,    'pet-detector/track_detector'
 
   Solver = GraphSolver
+
+  def self.resources_dir
+    @resources_dir ||= File.expand_path('../../resources', __FILE__)
+  end
 end

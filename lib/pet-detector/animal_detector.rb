@@ -27,6 +27,7 @@ module PetDetector
 
   class AnimalDetector
     UNFILTERED_PIXEL_THRESHOLD = 0.05
+    GRAY_HOUSE_PERCENTAGE = 0.65
     CLEANUP_FILTER = ColorRange.new(0..75, 0..75, 0..75)
     ALL_ANIMALS = %w(
       Chameleon Cockatiel Dachsund Ferret Hedgehog
@@ -69,7 +70,7 @@ module PetDetector
         quad_phashion = Phashion::Image.new('./tmp/quad.jpg')
 
         scores = animals.each_with_object([]) do |animal, ret|
-          entity_phashion, type = if gray >= 0.65
+          entity_phashion, type = if gray >= GRAY_HOUSE_PERCENTAGE
             [house_phashion_for(animal), 'house']
           else
             [pet_phashion_for(animal), 'animal']
@@ -87,30 +88,12 @@ module PetDetector
     end
 
     def house_path_for(animal)
-      "/Users/cameron/workspace/Cocos2dGames/Pet Detective/800/interests/house#{animal}House.png"
+      File.join(PetDetector.resources_dir, 'entities', "house#{animal}House.png")
     end
 
     def pet_path_for(animal)
-      "/Users/cameron/workspace/Cocos2dGames/Pet Detective/800/interests/pet#{animal}.png"
+      File.join(PetDetector.resources_dir, 'entities', "pet#{animal}.png")
     end
-
-    # def pet_phashion_for(animal)
-    #   phashion_for(pet_path_for(animal))
-    # end
-
-    # def house_phashion_for(animal)
-    #   phashion_for(house_path_for(animal))
-    # end
-
-    # def phashion_for(path)
-    #   self.class.phashion_cache[path] ||= begin
-    #     ext = File.extname(path)
-    #     filename = File.basename(path).chomp(ext)
-    #     mod_path = "./tmp/#{filename}_mod#{ext}"
-    #     Bitmap.load(path).reject_gray.trim.save(mod_path)
-    #     Phashion::Image.new(mod_path)
-    #   end
-    # end
 
     def pet_phashion_for(animal)
       path = pet_path_for(animal)

@@ -65,7 +65,7 @@ module PetDetector
     end
 
     def car_path_for(direction)
-      "/Users/cameron/workspace/Cocos2dGames/Pet Detective/800/car/car#{direction}.png"
+      File.join(PetDetector.resources_dir, 'entities', "car#{direction}.png")
     end
 
     def hist_for(file)

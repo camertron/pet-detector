@@ -77,15 +77,19 @@ module PetDetector
 
         quad_phashion = Phashion::Image.new('./tmp/quad.jpg')
 
-        scores = animals.each_with_object([]) do |animal, ret|
-          entity_phashion, type = if gray >= GRAY_HOUSE_PERCENTAGE
-            [house_phashion_for(animal), 'house']
-          else
-            [pet_phashion_for(animal), 'animal']
-          end
+        scores = if gray < 0.9
+          animals.each_with_object([]) do |animal, ret|
+            entity_phashion, type = if gray >= GRAY_HOUSE_PERCENTAGE
+              [house_phashion_for(animal), 'house']
+            else
+              [pet_phashion_for(animal), 'animal']
+            end
 
-          distance = quad_phashion.distance_from(entity_phashion)
-          ret << AnimalScore.new(animal, type, distance, x, y)
+            distance = quad_phashion.distance_from(entity_phashion)
+            ret << AnimalScore.new(animal, type, distance, x, y)
+          end
+        else
+          []
         end
 
         if !car_on_right?(x, y)

@@ -43,6 +43,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-16
 
 DEPENDENCIES
   pet-detector!
@@ -53,4 +54,4 @@ DEPENDENCIES
   ruby-prof
 
 BUNDLED WITH
-   1.15.1
+   1.16.2

@@ -126,7 +126,7 @@ module PetDetector
     private
 
     def animals
-      @animals ||= AnimalDetector.new(grid, animal_names).detect_animals
+      @animals ||= AnimalDetector.new(grid, car, animal_names).detect_animals
     end
 
     def car

@@ -135,6 +135,7 @@ module PetDetector
       x_start = quad.rect.left
       y_start = quad.rect.top + (quad.rect.height / 2)
       x, y = probe(quad, x_start, y_start, 1, 0)
+      return false if !x || !y
       x <= quad.rect.left + (quad.rect.width * TOLERANCE_PCT)
     end
 
@@ -142,6 +143,7 @@ module PetDetector
       x_start = quad.rect.right
       y_start = quad.rect.top + (quad.rect.height / 2)
       x, y = probe(quad, x_start, y_start, -1, 0)
+      return false if !x || !y
       x >= quad.rect.right - (quad.rect.width * TOLERANCE_PCT)
     end
 
@@ -149,6 +151,7 @@ module PetDetector
       x_start = quad.rect.left + (quad.rect.width / 2) + X_OFFSET
       y_start = quad.rect.top
       x, y = probe(quad, x_start, y_start, 0, 1)
+      return false if !x || !y
       y <= quad.rect.top + (quad.rect.height * TOLERANCE_PCT)
     end
 
@@ -156,6 +159,7 @@ module PetDetector
       x_start = quad.rect.left + (quad.rect.width / 2) + X_OFFSET
       y_start = quad.rect.bottom
       x, y = probe(quad, x_start, y_start, 0, -1)
+      return false if !x || !y
       y >= quad.rect.bottom - (quad.rect.height * TOLERANCE_PCT)
     end
 
@@ -164,9 +168,16 @@ module PetDetector
       y = y_start
 
       loop do
+        # color encountered
         break x, y if COLOR_RANGE.include?(quad.bitmap[x, y])
+
         x += x_delta
         y += y_delta
+
+        # outside bounds of quad
+        if x > x_start + quad.rect.width || y > y_start + quad.rect.height
+          break [nil, nil]
+        end
       end
     end
   end

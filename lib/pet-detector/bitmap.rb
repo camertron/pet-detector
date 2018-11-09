@@ -43,6 +43,10 @@ module PetDetector
       Bitmap.new(filename, new_pixels, columns, rows)
     end
 
+    def reject_color(color_range)
+      reject { |px| color_range.include?(px) }
+    end
+
     def reject_gray
       reject { |px| px.red == px.green && px.green == px.blue }
     end

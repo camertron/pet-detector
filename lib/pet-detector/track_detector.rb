@@ -119,8 +119,8 @@ module PetDetector
       matrix = Matrix.new(
         grid.map_quadrants do |x, y, quad|
           DirectionBools.new(
-            detect_top(quad, x, y), detect_bottom(quad, x, y),
-            detect_left(quad, x, y), detect_right(quad, x, y),
+            detect_top(quad), detect_bottom(quad),
+            detect_left(quad), detect_right(quad),
             x, y
           )
         end
@@ -133,51 +133,45 @@ module PetDetector
       matrix
     end
 
-    def detect_left(quad, quad_x, quad_y)
+    def detect_left(quad)
       x_start = quad.rect.left
       y_start = quad.rect.top + (quad.rect.height / 2)
-      x, y = probe(quad, x_start, y_start, 1, 0, quad_x, quad_y)
+      x, y = probe(quad, x_start, y_start, 1, 0)
       return false if !x || !y
       x <= quad.rect.left + (quad.rect.width * TOLERANCE_PCT)
     end
 
-    def detect_right(quad, quad_x, quad_y)
+    def detect_right(quad)
       x_start = quad.rect.right
       y_start = quad.rect.top + (quad.rect.height / 2)
-      x, y = probe(quad, x_start, y_start, -1, 0, quad_x, quad_y)
+      x, y = probe(quad, x_start, y_start, -1, 0)
       return false if !x || !y
       x >= quad.rect.right - (quad.rect.width * TOLERANCE_PCT)
     end
 
-    def detect_top(quad, quad_x, quad_y)
+    def detect_top(quad)
       x_start = quad.rect.left + (quad.rect.width / 2) + X_OFFSET
       y_start = quad.rect.top
-      x, y = probe(quad, x_start, y_start, 0, 1, quad_x, quad_y)
+      x, y = probe(quad, x_start, y_start, 0, 1)
       return false if !x || !y
       y <= quad.rect.top + (quad.rect.height * TOLERANCE_PCT)
     end
 
-    def detect_bottom(quad, quad_x, quad_y)
+    def detect_bottom(quad)
       x_start = quad.rect.left + (quad.rect.width / 2) + X_OFFSET
       y_start = quad.rect.bottom
-      x, y = probe(quad, x_start, y_start, 0, -1, quad_x, quad_y)
+      x, y = probe(quad, x_start, y_start, 0, -1)
       return false if !x || !y
       y >= quad.rect.bottom - (quad.rect.height * TOLERANCE_PCT)
     end
 
-    def probe(quad, x_start, y_start, x_delta, y_delta, quad_x, quad_y)
+    def probe(quad, x_start, y_start, x_delta, y_delta)
       x = x_start
       y = y_start
 
       loop do
         # color encountered
         break x, y if COLOR_RANGE.include?(quad.bitmap[x, y])
-
-        if car.x == quad_x && car.y == quad_y
-          if GAS_OVERLAY_COLOR_RANGE.include?(quad.bitmap[x, y])
-            break x, y
-          end
-        end
 
         x += x_delta
         y += y_delta

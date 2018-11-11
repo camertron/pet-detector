@@ -1,6 +1,6 @@
 module PetDetector
   class BoundaryDetector
-    X_OFFSET_FACTOR = 0.08  # pct
+    X_OFFSET_FACTOR = 0.15  # pct
 
     # aspect ratio => offset factor (pct)
     Y_OFFSET_FACTORS = {
@@ -10,7 +10,7 @@ module PetDetector
 
     # aspect ratio => adjustment factor (pct)
     BOUNDS_ADJUSTMENT_FACTORS = {
-      0.56 => 0.13,
+      0.56 => 0.10,
       0.66 => 0.12
     }
 

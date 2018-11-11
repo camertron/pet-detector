@@ -3,7 +3,7 @@ require 'check_entities'
 
 include PetDetector
 
-describe 'iPhone 6' do
+describe 'iPhone 6s' do
   let!(:manifest) do
     YAML.load_file(
       File.expand_path('../iphone6s/manifest.yml', __FILE__)
@@ -14,7 +14,7 @@ describe 'iPhone 6' do
     File.expand_path("../iphone6s/#{image_file}", __FILE__)
   end
 
-  describe 'level12' do
+  describe 'level14' do
     let(:level) { 12 }
 
     context 'car_in_the_way' do

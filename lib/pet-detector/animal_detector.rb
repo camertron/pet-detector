@@ -61,12 +61,6 @@ module PetDetector
           )
         )
 
-        # if the car is to our right, it can often stick its butt in our
-        # face and mess up the trim and therefore the phash matching
-        if car_on_right?(x, y)
-          quad.rect.right -= (quad.rect.width * 0.16).round
-        end
-
         hist = quad.histogram.reject_color(CLEANUP_FILTER)
         gray = hist.pct_gray
 
@@ -92,18 +86,11 @@ module PetDetector
           []
         end
 
-        if !car_on_right?(x, y)
-          scores.reject! { |s| s.distance > MAX_HAMMING_DISTANCE }
-        end
-
+        scores.reject! { |s| s.distance > MAX_HAMMING_DISTANCE }
         scores.size == 0 ? nil : AnimalScoreGroup.new(scores)
       end
 
       Matrix.new(quadrants)
-    end
-
-    def car_on_right?(x, y)
-      car.x == x + 1 && car.y == y
     end
 
     def house_path_for(animal)

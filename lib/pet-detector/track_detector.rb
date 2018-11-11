@@ -49,6 +49,7 @@ module PetDetector
 
   class TrackDetector
     COLOR_RANGE = ColorRange.new(0..30, 0..30, 0..30)
+    GAS_OVERLAY_COLOR_RANGE = ColorRange.new(111..116, 111..116, 111..116)
 
     # an offset to shift the x probe slightly to the right so the blacker
     # left-hand side of the rooves of houses don't interfere
@@ -58,10 +59,11 @@ module PetDetector
     # quadrant boundaries
     TOLERANCE_PCT = 0.15
 
-    attr_reader :grid
+    attr_reader :grid, :car
 
-    def initialize(grid)
+    def initialize(grid, car)
       @grid = grid
+      @car = car
     end
 
     def detect_directions
@@ -117,8 +119,8 @@ module PetDetector
       matrix = Matrix.new(
         grid.map_quadrants do |x, y, quad|
           DirectionBools.new(
-            detect_top(quad), detect_bottom(quad),
-            detect_left(quad), detect_right(quad),
+            detect_top(quad, x, y), detect_bottom(quad, x, y),
+            detect_left(quad, x, y), detect_right(quad, x, y),
             x, y
           )
         end
@@ -131,45 +133,51 @@ module PetDetector
       matrix
     end
 
-    def detect_left(quad)
+    def detect_left(quad, quad_x, quad_y)
       x_start = quad.rect.left
       y_start = quad.rect.top + (quad.rect.height / 2)
-      x, y = probe(quad, x_start, y_start, 1, 0)
+      x, y = probe(quad, x_start, y_start, 1, 0, quad_x, quad_y)
       return false if !x || !y
       x <= quad.rect.left + (quad.rect.width * TOLERANCE_PCT)
     end
 
-    def detect_right(quad)
+    def detect_right(quad, quad_x, quad_y)
       x_start = quad.rect.right
       y_start = quad.rect.top + (quad.rect.height / 2)
-      x, y = probe(quad, x_start, y_start, -1, 0)
+      x, y = probe(quad, x_start, y_start, -1, 0, quad_x, quad_y)
       return false if !x || !y
       x >= quad.rect.right - (quad.rect.width * TOLERANCE_PCT)
     end
 
-    def detect_top(quad)
+    def detect_top(quad, quad_x, quad_y)
       x_start = quad.rect.left + (quad.rect.width / 2) + X_OFFSET
       y_start = quad.rect.top
-      x, y = probe(quad, x_start, y_start, 0, 1)
+      x, y = probe(quad, x_start, y_start, 0, 1, quad_x, quad_y)
       return false if !x || !y
       y <= quad.rect.top + (quad.rect.height * TOLERANCE_PCT)
     end
 
-    def detect_bottom(quad)
+    def detect_bottom(quad, quad_x, quad_y)
       x_start = quad.rect.left + (quad.rect.width / 2) + X_OFFSET
       y_start = quad.rect.bottom
-      x, y = probe(quad, x_start, y_start, 0, -1)
+      x, y = probe(quad, x_start, y_start, 0, -1, quad_x, quad_y)
       return false if !x || !y
       y >= quad.rect.bottom - (quad.rect.height * TOLERANCE_PCT)
     end
 
-    def probe(quad, x_start, y_start, x_delta, y_delta)
+    def probe(quad, x_start, y_start, x_delta, y_delta, quad_x, quad_y)
       x = x_start
       y = y_start
 
       loop do
         # color encountered
         break x, y if COLOR_RANGE.include?(quad.bitmap[x, y])
+
+        if car.x == quad_x && car.y == quad_y
+          if GAS_OVERLAY_COLOR_RANGE.include?(quad.bitmap[x, y])
+            break x, y
+          end
+        end
 
         x += x_delta
         y += y_delta

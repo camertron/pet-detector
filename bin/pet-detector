@@ -49,6 +49,9 @@ if ENV['DEBUG']
   puts "Top: #{rect.top}, Bottom: #{rect.bottom}, Left: #{rect.left}, Right: #{rect.right}"
 end
 
+# sometimes the image needs to be resized in order to accommodate equal-sized
+# grid quadrants
+bmp, rect = BoundaryDetector.resize_if_necessary(bmp, rect)
 grid = Grid.new(bmp, rect, level)
 
 if ENV['DEBUG']

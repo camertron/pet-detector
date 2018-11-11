@@ -134,7 +134,7 @@ module PetDetector
     end
 
     def track_directions
-      @track_directions ||= TrackDetector.new(grid).detect_directions
+      @track_directions ||= TrackDetector.new(grid, car).detect_directions
     end
   end
 end

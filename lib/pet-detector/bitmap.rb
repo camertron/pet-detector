@@ -49,6 +49,15 @@ module PetDetector
 
     def reject_gray
       reject { |px| px.red == px.green && px.green == px.blue }
+      # reject do |px|
+        # r = px.red & 255
+        # g = px.green & 255
+        # b = px.blue & 255
+
+        # ((r - g).abs + (r - b).abs + (g - b).abs) / 3 < 15
+
+        # ((px.red & 255) - (px.green & 255)).abs < 12 && ((px.green & 255) - (px.blue & 255)).abs < 12
+      # end
     end
 
     def trim

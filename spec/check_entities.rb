@@ -4,6 +4,7 @@ RSpec.configure do |config|
     bmp = Bitmap.load(image_file)
     det = BoundaryDetector.new(bmp)
     rect = det.get_bounds
+    bmp, rect = BoundaryDetector.resize_if_necessary(bmp, rect)
     grid = Grid.new(bmp, rect, level)
 
     if ENV['DEBUG']

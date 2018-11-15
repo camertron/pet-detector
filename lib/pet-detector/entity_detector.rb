@@ -1,9 +1,11 @@
 module PetDetector
   class Entity
-    attr_reader :directions
+    attr_reader :directions, :x, :y
 
-    def initialize(directions)
+    def initialize(directions, x, y)
       @directions = directions
+      @x = x
+      @y = y
     end
 
     def pet?
@@ -42,9 +44,9 @@ module PetDetector
   class PetEntity < Entity
     attr_reader :name
 
-    def initialize(name, track_directions)
+    def initialize(name, track_directions, x, y)
       @name = name
-      super(track_directions)
+      super(track_directions, x, y)
     end
 
     def pet?
@@ -63,9 +65,9 @@ module PetDetector
   class HouseEntity < Entity
     attr_reader :name
 
-    def initialize(name, track_directions)
+    def initialize(name, track_directions, x, y)
       @name = name
-      super(track_directions)
+      super(track_directions, x, y)
     end
 
     def house?
@@ -108,15 +110,15 @@ module PetDetector
         tracks = track_directions[x, y]
 
         if car.x == x && car.y == y
-          CarEntity.new(tracks)
+          CarEntity.new(tracks, x, y)
         elsif animal = animals[x, y]
           if animal.type == 'house'
-            HouseEntity.new(animal.name, tracks)
+            HouseEntity.new(animal.name, tracks, x, y)
           else
-            PetEntity.new(animal.name, tracks)
+            PetEntity.new(animal.name, tracks, x, y)
           end
         else
-          Entity.new(tracks)
+          Entity.new(tracks, x, y)
         end
       end
 

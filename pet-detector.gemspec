@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rmagick', '~> 2.0'
   s.add_dependency 'simple-graph', '~> 1.0'
   s.add_dependency 'phashion'
+  s.add_dependency 'graphics', '~> 1.0'
 
   s.require_path = 'lib'
   s.files = Dir['{lib,spec}/**/*', 'pet-detector.gemspec']

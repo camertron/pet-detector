@@ -14,6 +14,7 @@ module PetDetector
   autoload :Matrix,           'pet-detector/matrix'
   autoload :Quadrant,         'pet-detector/quadrant'
   autoload :Rect,             'pet-detector/rect'
+  autoload :Simulation,       'pet-detector/simulation'
   autoload :TrackDetector,    'pet-detector/track_detector'
 
   Solver = GraphSolver

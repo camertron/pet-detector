@@ -45,6 +45,16 @@ module PetDetector
     def to_h
       { top: top, bottom: bottom, left: left, right: right }
     end
+
+    def to_i
+      btoi(top) << 3 | btoi(bottom) << 2 | btoi(left) << 1 | btoi(right)
+    end
+
+    private
+
+    def btoi(b)
+      b ? 1 : 0
+    end
   end
 
   class TrackDetector

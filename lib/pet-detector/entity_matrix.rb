@@ -13,8 +13,6 @@ module PetDetector
       end
     end
 
-    private
-
     def graph
       @graph ||= SimpleGraph::Graph.new.tap do |graph|
         each do |x, y, entity|
@@ -26,6 +24,8 @@ module PetDetector
         end
       end
     end
+
+    private
 
     def add_left_neighbors(graph, entity, x, y)
       if entity.directions.left?

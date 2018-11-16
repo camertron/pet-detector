@@ -178,7 +178,7 @@ module PetDetector
 
       @quad_x = car.entity.x
       @quad_y = car.entity.y
-      @instr_idx = 1
+      @instr_idx = 0
 
       car.m = 3
 

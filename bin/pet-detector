@@ -89,4 +89,6 @@ solution.each_with_index do |entity, idx|
   puts "#{idx + 1}. #{entity.to_s}"
 end
 
-Simulation.new(level, entity_matrix, solution).run
+if ENV['SIMULATE']
+  Simulation.new(level, entity_matrix, solution).run
+end
